@@ -1,7 +1,66 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+let currentDayEl = $('#currentDay');
+
+let today = dayjs();
+
+function getCurrentDay() {
+    currentDayEl.text(today.format('[Todays Date: ]dddd, MMM D, YYYY'));
+}
+
+getCurrentDay();
+
+function renderTimeBlocks() {
+    let currentHour = today.format('H');
+
+    $(".time-block").each(function () {
+        let hourID = $(this).attr("id")
+        console.log(hourID);
+        let intHourID = parseInt(hourID.substring(5));
+        console.log(intHourID);
+
+        if (intHourID < currentHour) {
+            $(this).addClass("past");
+            $(this).removeClass("present");
+            $(this).removeClass("future");
+        };
+        if (intHourID == currentHour) {
+            $(this).addClass("present");
+            $(this).removeClass("past");
+            $(this).removeClass("future");
+
+        };
+        if (intHourID > currentHour) {
+            $(this).addClass("future");
+            $(this).removeClass("past");
+            $(this).removeClass("present");
+        };
+    })
+};
+
+renderTimeBlocks();
+
+$(".saveBtn").on("click", function (event) {
+    event.preventDefault();
+
+    let savedToDo = $(this).siblings(".description").val();
+    let savedTime = $(this).parent().attr("id");
+    let savedHourID = parseInt(savedTime.substring(5));
+
+    localStorage.setItem(savedHourID, savedToDo);
+});
+
+for (var i = 9; i< 18; i++) {
+    $("#hour-"+ i + " .description").text(localStorage.getItem(i))
+
+}
+
+
 $(function () {
+    let currentDayEl = $('#currentDay');
+    let today = dayjs();
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -18,7 +77,13 @@ $(function () {
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
-    //
+    
+
+
     // TODO: Add code to display the current date in the header of the page.
+    function getCurrentDay() {
+        currentDayEl.text(today.format('[Todays Date: ]dddd, MMM D, YYYY'));
+    };
+    getCurrentDay();
   });
   
