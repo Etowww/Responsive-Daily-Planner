@@ -4,7 +4,7 @@
 This is a responsive work day scheduler application that displays the current date and the top of the screen as well as time blocks from 9am-5pm that have text fields for the user to enter and save any useful information as a reminder. The time blocks are color coordinated to show wether that time block is in the past, present, or future.
 The time blocks also contain a save button that allows the user to save their text input for a specific hour to local storage allowing the text to remain displayed even if the page is refreshed. This application was built to help the user better manage things-to-do or events they have planned for any given work day.
 
-Deployed Application Link: 
+Deployed Application Link: https://etowww.github.io/Responsive-Daily-Planner/
 
 ## Table of Contents (Optional)
 N/A
